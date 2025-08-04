@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="obstacle_dimens">40dp</dimen>
+    <dimen name="heart_dimens">40dp</dimen>
+    <dimen name="default_margin">10dp</dimen>
+    <dimen name="Arrow_Size">20sp</dimen>
+    <dimen name="Lives_dimens">40dp</dimen>
+    <dimen name="Score_dimens">40sp</dimen>
+    <dimen name="score_margin_top">5dp</dimen>
+    <dimen name="menu_image_width">150dp</dimen>
+    <dimen name="menu_image_height">280dp</dimen>
+    <dimen name="menu_text_size">35sp</dimen>
+    <dimen name="menu_title_margin">5dp</dimen>
+    <dimen name="title_GameMode_text_size">30sp</dimen>
+    <dimen name="arrow_width">60dp</dimen>
+    <dimen name="game_title_size">45sp</dimen>
+    <dimen name="thumb_switch_margin">3dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="main_menu_margin">10dp</dimen>
+    <dimen name="obstacle_margin">20dp</dimen>
+</resources>

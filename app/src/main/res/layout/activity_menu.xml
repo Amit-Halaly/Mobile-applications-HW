@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/road_manu"
+    tools:context=".MenuActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/title_IMG_car"
+        android:layout_width="@dimen/menu_image_width"
+        android:layout_height="@dimen/menu_image_height"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/car"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/title_IMG_obstacle"
+        android:layout_width="@dimen/menu_image_width"
+        android:layout_height="@dimen/menu_image_height"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/barrier"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title_LBL_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="@dimen/game_title_size"
+        android:layout_below="@id/title_IMG_obstacle"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_margin="@dimen/menu_title_margin"
+        android:text="@string/game_title"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/title_BTN_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_BTN_text"
+        android:layout_below="@id/title_LBL_title"
+        android:layout_centerInParent="true"
+        android:textSize="@dimen/menu_text_size"
+        android:textColor="@color/white"
+        android:layout_margin="@dimen/menu_title_margin"
+        android:textStyle="bold"
+        android:backgroundTint="@color/black"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/title_BTN_records"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/records_BTN_text"
+        android:layout_below="@id/title_BTN_start"
+        android:layout_centerInParent="true"
+        android:textSize="@dimen/menu_text_size"
+        android:textColor="@color/white"
+        android:layout_margin="@dimen/menu_title_margin"
+        android:textStyle="bold"
+        android:backgroundTint="@color/black" />
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/title_SWITCH_Mode"
+        android:layoutDirection="ltr"
+        android:textDirection="ltr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_BTN_records"
+        android:layout_centerInParent="true"
+        android:textSize="@dimen/title_GameMode_text_size"
+        android:textColor="@color/black"
+        app:thumbTint="@color/blue"
+        android:layout_margin="@dimen/menu_title_margin"
+        android:textStyle="bold"
+        android:text="@string/game_mode_switch_text"
+        app:showText="true"
+        android:textOn="@string/tilt_switch_text"
+        android:textOff="@string/button_switch_text"
+        />
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/title_SWITCH_speed"
+        android:layoutDirection="ltr"
+        android:textDirection="ltr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_SWITCH_Mode"
+        android:layout_centerInParent="true"
+        android:textSize="@dimen/title_GameMode_text_size"
+        android:textColor="@color/black"
+        app:thumbTint="@color/blue"
+        android:layout_margin="@dimen/menu_title_margin"
+        android:textStyle="bold"
+        android:text="@string/game_speed_switch_text"
+        app:showText="true"
+        android:textOn="@string/switch_speed_fast"
+        android:textOff="@string/switch_speed_slow"
+        />
+
+
+</RelativeLayout>
