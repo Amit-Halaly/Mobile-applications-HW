@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import com.example.mobile_applications_hw.utilities.SignalManager
 import com.example.mobile_applications_hw.utilities.SingleSoundPlayer
 import kotlin.random.Random
+import androidx.core.view.isVisible
 
 class GameManager(
     context: Context,
@@ -109,7 +110,7 @@ class GameManager(
         var randomIndex: Int
         do {
             randomIndex = Random.nextInt(firstRowCoins.size)
-        } while (firstRowObstacles[randomIndex].visibility == View.VISIBLE)
+        } while (firstRowObstacles[randomIndex].isVisible)
         firstRowCoins[randomIndex].visibility = View.VISIBLE
     }
 
@@ -152,9 +153,9 @@ class GameManager(
     private fun moveObstaclesDown() {
         for (row in obstacles.indices.reversed()) {
             for (col in obstacles[row].indices) {
-                val cop = obstacles[row][col]
-                if (cop.visibility == View.VISIBLE) {
-                    cop.visibility = View.INVISIBLE
+                val obstacle = obstacles[row][col]
+                if (obstacle.isVisible) {
+                    obstacle.visibility = View.INVISIBLE
                     if (row + 1 < obstacles.size) {
                         obstacles[row + 1][col].visibility = View.VISIBLE
                     }
@@ -167,7 +168,7 @@ class GameManager(
         for (row in coins.indices.reversed()) {
             for (col in coins[row].indices) {
                 val coin = coins[row][col]
-                if (coin.visibility == View.VISIBLE) {
+                if (coin.isVisible) {
                     coin.visibility = View.INVISIBLE
                     if (row + 1 < coins.size) {
                         coins[row + 1][col].visibility = View.VISIBLE
@@ -179,17 +180,17 @@ class GameManager(
 
 
     private fun checkCollisions() {
-        if (obstacles.last()[carPosition].visibility == View.VISIBLE) {
+        if (obstacles.last()[carPosition].isVisible) {
             handleCollision()
         }
-        if (coins.last()[carPosition].visibility == View.VISIBLE) {
+        if (coins.last()[carPosition].isVisible) {
             coinCollected()
         }
     }
 
 
     private fun handleCollision() {
-       // singleSoundPlayer.playSound(R.raw.boom_cinema)
+        singleSoundPlayer.playSound(R.raw.boom_cinema)
         lives--
         updateScore(-50)
         toastAndVibrate()
@@ -212,7 +213,7 @@ class GameManager(
     }
 
     private fun coinCollected() {
-       // singleSoundPlayer.playSound(R.raw.coin_collected)
+        singleSoundPlayer.playSound(R.raw.coin_collected)
         updateScore(100)
         SignalManager.getInstance().toast("Coin Collected! +100")
         SignalManager.getInstance().vibrate()

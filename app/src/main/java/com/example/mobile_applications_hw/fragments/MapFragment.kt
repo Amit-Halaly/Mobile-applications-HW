@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.mobile_applications_hw.R
-import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.CameraUpdateFactory.newLatLngZoom
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -30,25 +30,26 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map_fragment)
                 as? SupportMapFragment
         mapFragment?.getMapAsync(this)
+       // SupportMapFragment.newInstance().getMapAsync(this)
     }
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
+        map.uiSettings.isMapToolbarEnabled = true
+        map.uiSettings.isZoomControlsEnabled = true
         val defaultLocation = LatLng(32.084932, 34.835226)
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 10f))
+        googleMap.moveCamera(newLatLngZoom(defaultLocation, 10f))
     }
 
     fun placeMarkerAndZoom(lat: Double, lon: Double, title: String) {
-        if (::googleMap.isInitialized) {
-            val position = LatLng(lat, lon)
+        val position = LatLng(lat, lon)
 
-            googleMap.addMarker(
-                MarkerOptions()
-                    .position(position)
-                    .title(title)
-            )
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 14f))
-        }
+        googleMap.addMarker(
+            MarkerOptions()
+                .position(position)
+                .title(title)
+        )
+        googleMap.animateCamera(newLatLngZoom(position, 14f))
     }
 
 }

@@ -54,7 +54,6 @@ class RecordsActivity : AppCompatActivity(), LocationUpdatedCallback {
         supportFragmentManager.beginTransaction()
             .add(R.id.main_FRAME_map, mapFragment)
             .commit()
-
         highScoreFragment = HighScoreFragment()
 
         highScoreFragment.highScoreItemClicked = object : Callback_HighScoreItemClicked {
