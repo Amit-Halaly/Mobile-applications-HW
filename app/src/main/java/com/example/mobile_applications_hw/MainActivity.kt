@@ -190,9 +190,7 @@ class MainActivity : AppCompatActivity() {
             obstacles = obstacles,
             coins = coins,
             hearts = hearts,
-            leftButton = leftArrow,
-            rightButton = rightArrow,
-            onGameOver = { score -> handleGameOver(score) },
+            onGameOver = { handleGameOver(gameManager.score) },
             onScoreUpdated = { newScore -> updateScoreUI(newScore) }
         )
     }
@@ -262,7 +260,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun handleGameOver(finalScore: Int) {
-        val intent = Intent(this, RecordsMapActivity::class.java)
+        val intent = Intent(this, RecordsActivity::class.java)
         intent.putExtra("Score", finalScore)
         startActivity(intent)
         finish()

@@ -12,4 +12,5 @@
     <string name="switch_speed_fast">fast</string>
     <string name="switch_speed_slow">slow</string>
     <string name="main_menu">Menu</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

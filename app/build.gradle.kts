@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "com.example.mobile_applications_hw"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -48,12 +48,12 @@ secrets {
 
     // A properties file containing default secret values. This file can be
     // checked in version control.
-    //defaultPropertiesFileName = "local.defaults.properties"
+    defaultPropertiesFileName = "local.defaults.properties"
 
     // Configure which keys should be ignored by the plugin by providing regular expressions.
     // "sdk.dir" is ignored by default.
     ignoreList.add("keyToIgnore") // Ignore the key "keyToIgnore"
-   ignoreList.add("sdk.*")       // Ignore all keys matching the regexp "sdk.*"
+    ignoreList.add("sdk.*")       // Ignore all keys matching the regexp "sdk.*"
 }
 
 

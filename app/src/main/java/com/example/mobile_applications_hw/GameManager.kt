@@ -2,130 +2,228 @@ package com.example.mobile_applications_hw
 
 import android.content.Context
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.example.mobile_applications_hw.utilities.SignalManager
+import com.example.mobile_applications_hw.utilities.SingleSoundPlayer
+import kotlin.random.Random
 
 class GameManager(
-    private val context: Context,
+    context: Context,
     private val car: Array<ImageView>,
     private val obstacles: Array<Array<ImageView>>,
     private val coins: Array<Array<ImageView>>,
     private val hearts: Array<AppCompatImageView>,
-    private val leftButton: ExtendedFloatingActionButton,
-    private val rightButton: ExtendedFloatingActionButton,
-    private val onGameOver: (Int) -> Unit,
+    private val onGameOver: () -> Unit,
     private val onScoreUpdated: (Int) -> Unit
 ) {
-    private val handler = Handler()
-    private val TICK_SLOW = 800L
-    private val TICK_FAST = 400L
-    private var tickInterval = TICK_SLOW
 
-    private var currentLane = 2
-    var score = 0
+    private val singleSoundPlayer = SingleSoundPlayer(context)
+
+    var score: Int = 0
         private set
+
+    private var carPosition = 2
+
     private var lives = 3
 
+    private var gameOver = false
+
+    val handler = Handler(Looper.getMainLooper())
+
+    private var gameSpeed: Long = 1000L
+
+
     fun updateSpeed(isFast: Boolean) {
-        tickInterval = if (isFast) TICK_FAST else TICK_SLOW
+        gameSpeed = if (isFast) 500L else 1000L
     }
 
-    fun startGame() {
-        resetAll()
-        updateCarUI()
-        handler.postDelayed(gameLoopRunnable, tickInterval)
-        leftButton.setOnClickListener { moveCarLeft() }
-        rightButton.setOnClickListener { moveCarRight() }
+    fun resetGame() {
+        lives = 3
+        gameOver = false
+
+        resetHearts()
+        resetScore()
+        resetCar()
+        resetObstacles()
+        resetCoins()
+        placeObstaclesRandomly()
+        placeCoinsRandomly()
     }
 
-    private val gameLoopRunnable = object : Runnable {
-        override fun run() {
-            stepObstaclesAndCoins()
-            checkCollisions()
-            handler.postDelayed(this, tickInterval)
+
+    private fun resetCar() {
+        for (i in car.indices) {
+            car[i].visibility = View.INVISIBLE
+        }
+        car[carPosition].visibility = View.VISIBLE
+    }
+
+
+    private fun resetHearts() {
+        for (heart in hearts) {
+            heart.visibility = View.VISIBLE
         }
     }
 
-    private fun resetAll() {
+
+    private fun resetObstacles() {
+        for (row in obstacles) {
+            for (obstacles in row) {
+                obstacles.visibility = View.INVISIBLE
+            }
+        }
+    }
+
+    private fun resetCoins() {
+        for (row in coins) {
+            for (coin in row) {
+                coin.visibility = View.INVISIBLE
+            }
+        }
+    }
+
+    private fun resetScore() {
         score = 0
-        lives = hearts.size
         onScoreUpdated(score)
-        hearts.forEach { it.visibility = View.VISIBLE }
-        obstacles.flatten().forEach { it.visibility = View.INVISIBLE }
-        coins.flatten().forEach    { it.visibility = View.INVISIBLE }
-        spawnInitialRow()
     }
 
-    private fun spawnInitialRow() {
-        val row0Obs = obstacles[0]
-        val row0Coins = coins[0]
-        for (col in 0 until 5) {
-            if ((0..1).random() == 0) {
-                row0Obs[col].visibility = View.VISIBLE
-                row0Coins[col].visibility = View.INVISIBLE
-            } else {
-                row0Coins[col].visibility = View.VISIBLE
-                row0Obs[col].visibility = View.INVISIBLE
-            }
+
+    private fun placeObstaclesRandomly() {
+        val firstRow = obstacles[0]
+        for (i in firstRow.indices) {
+            firstRow[i].visibility = View.INVISIBLE
         }
+        val randomIndex = Random.nextInt(firstRow.size)
+        firstRow[randomIndex].visibility = View.VISIBLE
     }
 
-    private fun stepObstaclesAndCoins() {
-        for (col in 0 until 5) {
-            obstacles.last()[col].visibility = View.INVISIBLE
-            coins.last()[col].visibility     = View.INVISIBLE
+    private fun placeCoinsRandomly() {
+        val firstRowCoins = coins[0]
+        val firstRowObstacles = obstacles[0]
+        for (i in firstRowCoins.indices) {
+            firstRowCoins[i].visibility = View.INVISIBLE
         }
-        for (row in obstacles.size - 1 downTo 1) {
-            for (col in 0 until 5) {
-                obstacles[row][col].visibility = obstacles[row - 1][col].visibility
-                coins[row][col].visibility     = coins[row - 1][col].visibility
-            }
-        }
-        spawnInitialRow()
-        updateCarUI()
+        var randomIndex: Int
+        do {
+            randomIndex = Random.nextInt(firstRowCoins.size)
+        } while (firstRowObstacles[randomIndex].visibility == View.VISIBLE)
+        firstRowCoins[randomIndex].visibility = View.VISIBLE
     }
 
-    private fun checkCollisions() {
-        val obs = obstacles.last()[currentLane]
-        val coin = coins.last()[currentLane]
-        if (obs.visibility == View.VISIBLE) {
-            lives--
-            hearts[lives].visibility = View.INVISIBLE
-            obs.visibility = View.INVISIBLE
-            if (lives == 0) {
-                handler.removeCallbacks(gameLoopRunnable)
-                onGameOver(score)
-            }
-        } else if (coin.visibility == View.VISIBLE) {
-            score += 10
-            onScoreUpdated(score)
-            coin.visibility = View.INVISIBLE
-        }
-    }
 
     fun moveCarLeft() {
-        if (currentLane > 0) {
-            currentLane--
-            updateCarUI()
+        if (!gameOver && carPosition > 0) {
+            car[carPosition].visibility = View.INVISIBLE
+            carPosition--
+            car[carPosition].visibility = View.VISIBLE
         }
     }
+
 
     fun moveCarRight() {
-        if (currentLane < car.size - 1) {
-            currentLane++
-            updateCarUI()
+        if (!gameOver && carPosition < 4) {
+            car[carPosition].visibility = View.INVISIBLE
+            carPosition++
+            car[carPosition].visibility = View.VISIBLE
         }
     }
 
-    private fun updateCarUI() {
-        car.forEachIndexed { index, iv ->
-            iv.visibility = if (index == currentLane) View.VISIBLE else View.INVISIBLE
+
+    fun startGame() {
+        resetGame()
+        val gameLoopRunnable = object : Runnable {
+            override fun run() {
+                if (!gameOver) {
+                    moveObstaclesDown()
+                    moveCoinsDown()
+                    placeObstaclesRandomly()
+                    placeCoinsRandomly()
+                    checkCollisions()
+                    handler.postDelayed(this, gameSpeed)
+                }
+            }
+        }
+        handler.post(gameLoopRunnable)
+    }
+
+    private fun moveObstaclesDown() {
+        for (row in obstacles.indices.reversed()) {
+            for (col in obstacles[row].indices) {
+                val cop = obstacles[row][col]
+                if (cop.visibility == View.VISIBLE) {
+                    cop.visibility = View.INVISIBLE
+                    if (row + 1 < obstacles.size) {
+                        obstacles[row + 1][col].visibility = View.VISIBLE
+                    }
+                }
+            }
         }
     }
 
-    fun stopGame() {
-        handler.removeCallbacks(gameLoopRunnable)
+    private fun moveCoinsDown() {
+        for (row in coins.indices.reversed()) {
+            for (col in coins[row].indices) {
+                val coin = coins[row][col]
+                if (coin.visibility == View.VISIBLE) {
+                    coin.visibility = View.INVISIBLE
+                    if (row + 1 < coins.size) {
+                        coins[row + 1][col].visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
+    }
+
+
+    private fun checkCollisions() {
+        if (obstacles.last()[carPosition].visibility == View.VISIBLE) {
+            handleCollision()
+        }
+        if (coins.last()[carPosition].visibility == View.VISIBLE) {
+            coinCollected()
+        }
+    }
+
+
+    private fun handleCollision() {
+       // singleSoundPlayer.playSound(R.raw.boom_cinema)
+        lives--
+        updateScore(-50)
+        toastAndVibrate()
+        hearts[lives].visibility = View.INVISIBLE
+        if (lives == 0) {
+            gameOver = true
+            onGameOver()
+        }
+    }
+
+
+    private fun toastAndVibrate() {
+        if (lives == 0) {
+            SignalManager.getInstance().toast("Game Over your score is : " + score)
+            SignalManager.getInstance().vibrate()
+        } else {
+            SignalManager.getInstance().toast("Collision! -50")
+            SignalManager.getInstance().vibrate()
+        }
+    }
+
+    private fun coinCollected() {
+       // singleSoundPlayer.playSound(R.raw.coin_collected)
+        updateScore(100)
+        SignalManager.getInstance().toast("Coin Collected! +100")
+        SignalManager.getInstance().vibrate()
+
+    }
+
+    private fun updateScore(points: Int) {
+        score += points
+        if (score < 0) {
+            score = 0
+        }
+        onScoreUpdated(score)
     }
 }

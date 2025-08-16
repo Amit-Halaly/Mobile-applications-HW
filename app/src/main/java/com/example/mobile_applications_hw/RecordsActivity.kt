@@ -35,7 +35,7 @@ class RecordsActivity : AppCompatActivity(), LocationUpdatedCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_records_map)
+        setContentView(R.layout.activity_records)
 
         findViews()
         initViews()
