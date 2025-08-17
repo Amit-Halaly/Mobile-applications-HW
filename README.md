@@ -75,7 +75,7 @@ The main screen includes the **game settings** (no separate settings screen):
 
 **Screenshot**
 
-![Game](docs/images/game.jpg)
+![Game](./docs/images/game.jpg)
 
 ---
 
@@ -90,7 +90,7 @@ The main screen includes the **game settings** (no separate settings screen):
 
 | Dark                                          | Light                                           |
 | --------------------------------------------- | ----------------------------------------------- |
-| ![Records Dark](docs/images/records_dark.jpg) | ![Records Light](docs/images/records_light.jpg) |
+| ![Records Dark](./docs/images/records_dark.jpg) | ![Records Light](./docs/images/records_light.jpg) |
 
 ---
 
@@ -129,50 +129,6 @@ app/src/main/res/raw/boom_cinema.mp3
 
 ---
 
-## Project Structure (key parts)
-
-```
-app/src/main/java/com/example/mobile_applications_hw/
-├─ adapters/
-│  └─ ScoreAdapter.kt
-├─ fragments/
-│  ├─ HighScoreFragment.kt
-│  └─ MapFragment.kt
-├─ interfaces/
-│  ├─ Callback_HighScoreItemClicked.kt
-│  └─ TiltCallback.kt
-├─ model/
-│  └─ Score.kt
-├─ utilities/
-│  ├─ LocationDetector.kt
-│  ├─ SingleSoundPlayer.kt
-│  ├─ TiltDetector.kt
-│  └─ SignalManager.kt
-├─ App.kt
-├─ GameManager.kt
-├─ MainActivity.kt
-├─ MapsActivity.kt
-├─ MenuActivity.kt
-├─ RecordsActivity.kt
-└─ ScoreManager.kt
-```
-
-Resources:
-
-```
-app/src/main/res/
-├─ drawable/ (car.png, barrier.png, coin.png, heart.png, road.png, etc.)
-├─ layout/ (activities & fragments)
-├─ mipmap/ (launcher icons)
-├─ raw/ (sound files)
-└─ values/
-   ├─ colors.xml
-   ├─ colors.xml (night)
-   ├─ strings.xml
-   └─ themes/
-```
-
----
 
 ## Getting Started (quick)
 
@@ -196,11 +152,16 @@ app/src/main/res/
 If you want the exact layout like in your examples, name/place the files like this:
 
 ```
-docs/images/
+./docs/images/
+
   menu_light.jpg
+  
   menu_dark.jpg
+  
   game.jpg
+  
   records_light.jpg
+  
   records_dark.jpg
 ```
 
