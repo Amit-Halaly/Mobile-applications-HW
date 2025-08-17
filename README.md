@@ -1,7 +1,7 @@
 
 # Car & Obstacles
 
-A mobile game made as part of Afeka’s **Mobile Apps – 25A10357** course.
+A mobile game made as part of Afeka’s **Mobile Apps – 25B10357** course.
 
 > Collect coins, dodge roadblocks, and rack up a high score.
 > Motion controls (tilt) and classic button controls are both supported.
@@ -56,7 +56,7 @@ The main screen includes the **game settings** (no separate settings screen):
 
 | Light                                     | Dark                                    |
 | ----------------------------------------- | --------------------------------------- |
-| ![Menu Light](Mobile-applications-HW/docs/images/menu_light.jpg) | ![Menu Dark](Mobile-applications-HW/docs/images/menu_dark.jpg) |
+| ![Menu Light](docs/images/menu_light.jpg) | ![Menu Dark](docs/images/menu_dark.jpg) |
 
 > Put your images under `docs/images/` and use these names (or adjust the paths above).
 
@@ -79,7 +79,7 @@ The main screen includes the **game settings** (no separate settings screen):
 
 **Screenshot**
 
-![Game](Mobile-applications-HW/docs/images/game.jpg)
+![Game](docs/images/game.jpg)
 
 ---
 
@@ -94,7 +94,7 @@ The main screen includes the **game settings** (no separate settings screen):
 
 | Dark                                          | Light                                           |
 | --------------------------------------------- | ----------------------------------------------- |
-| ![Records Dark](Mobile-applications-HW/docs/images/records_dark.jpg) | ![Records Light](Mobile-applications-HW/docs/images/records_light.jpg) |
+| ![Records Dark](docs/images/records_dark.jpg) | ![Records Light](docs/images/records_light.jpg) |
 
 ---
 
