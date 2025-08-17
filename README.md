@@ -56,7 +56,7 @@ The main screen includes the **game settings** (no separate settings screen):
 
 | Light                                     | Dark                                    |
 | ----------------------------------------- | --------------------------------------- |
-| ![Menu Light](docs/images/menu_light.jpg) | ![Menu Dark](docs/images/menu_dark.jpg) |
+| <img src="docs/images/menu_light.jpg" width="200"> | <img src="docs/images/menu_dark.jpg" width="200"> |
 
 > Put your images under `docs/images/` and use these names (or adjust the paths above).
 
