@@ -109,7 +109,7 @@ The main screen includes the **game settings** (no separate settings screen):
 
 Place audio files under `app/src/main/res/raw/`, for example:
 
-```
+
 app/src/main/res/raw/coin_collected.mp3
 app/src/main/res/raw/boom_cinema.mp3
 
@@ -152,7 +152,7 @@ app/src/main/res/raw/boom_cinema.mp3
 ---
 
 ### Notes on the screenshots
-```
+
 # If you want the exact layout like in your examples, name/place the files like this:
 
 
