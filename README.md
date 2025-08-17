@@ -44,7 +44,11 @@ The main screen includes the **game settings** (no separate settings screen):
 
   * **Buttons** – Left/Right FABs
   * **Tilt** – uses the device’s accelerometer (`TiltDetector`)
-* **Game Speed:** Slow / Fast
+* **Game Speed:** 
+  
+ * **Slow**
+ * **Fast**
+    
 * **Start** – launches the game
 * **Records** – opens the highscores + map screen
 
