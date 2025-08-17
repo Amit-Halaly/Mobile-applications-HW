@@ -1,7 +1,3 @@
-Here’s a clean, **GitHub-ready** README tailored to your project and layout (settings are on the main screen, not a separate screen).
-Copy this into `README.md` at the repo root. I also included suggested image file names/paths so it renders nicely.
-
----
 
 # Car & Obstacles
 
