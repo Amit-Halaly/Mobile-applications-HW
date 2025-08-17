@@ -73,7 +73,6 @@ The main screen includes the **game settings** (no separate settings screen):
   * **Tilt**: lean the device to move; optional Y-tilt can adjust speed offset (if you enable it)
 * **Audio**
 
-  * Background music during gameplay (looped)
   * Coin pickup SFX
   * Obstacle hit SFX (and life is lost)
 
