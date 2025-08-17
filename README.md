@@ -79,7 +79,7 @@ The main screen includes the **game settings** (no separate settings screen):
 
 **Screenshot**
 
-![Game](docs/images/game.jpg)
+<img src="docs/images/game.jpg" width="200"> 
 
 ---
 
@@ -94,7 +94,7 @@ The main screen includes the **game settings** (no separate settings screen):
 
 | Dark                                          | Light                                           |
 | --------------------------------------------- | ----------------------------------------------- |
-| ![Records Dark](docs/images/records_dark.jpg) | ![Records Light](docs/images/records_light.jpg) |
+|<img src="docs/images/records_dark.jpg" width="200">  |<img src="docs/images/records_light.jpg" width="200"> |
 
 ---
 
